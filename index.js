@@ -23,7 +23,7 @@ mongoose.connect('mongodb+srv://pavan:Pavan5678@cluster0.rhmr5.mongodb.net/regis
 )
 
 app.listen(process.env.PORT, () => {
-    console.log("Connected to server");
+    console.log("Connected to server at port " + (process.env.PORT));
 })
 
 app.get("/test", (req, res) => {
