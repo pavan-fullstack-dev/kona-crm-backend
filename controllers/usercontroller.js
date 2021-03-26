@@ -1,4 +1,4 @@
-const users = require('../models/bookSchema')
+const users = require('../models/userSchema')
 
 exports.createuser = (req, res) => {
     const user = new users(req.body);

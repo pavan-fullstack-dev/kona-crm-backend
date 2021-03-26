@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createuser, getuserByuser_emailid, getAllusers, updateuser, removeuser} = require('../controller/usercontroller')
+const { createuser, getuserByuser_emailid, getAllusers, updateuser, removeuser} = require('../controllers/usercontroller')
 
 router.post("/create", createuser);
 router.post("/oneuser", getuserByuser_emailid);
