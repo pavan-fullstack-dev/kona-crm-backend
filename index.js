@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bodyParser.json())
 app.use('/user', usersRouter)
 
-mongoose.connect('mongodb://localhost:27017/books',{
+mongoose.connect('mongodb+srv://pavan:Pavan5678@cluster0.rhmr5.mongodb.net/registeredusers?retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true

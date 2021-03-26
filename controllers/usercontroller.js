@@ -12,7 +12,7 @@ exports.createuser = (req, res) => {
     })
 }
 
-exports.getuserByuseruser_emailid = (req, res) => {
+exports.getuserByuser_emailid = (req, res) => {
     users.findOne({"user_emailid":req.body.user_emailid}).exec((err, oneuser) => {
         if(err){
             return res.status(400).json({
@@ -54,13 +54,13 @@ exports.updateuser = (req, res) => {
             user.user_mobile = req.body.user_mobile;
         }
         //console.log(book)
-        Books.updateOne({Bid:book.Bid}, {$set:book}, (err, updbook) => {
+        users.updateOne({user_firstname:user.user_firstname},{user_lastname:user.user_lastname},{user_emailid:user.user_emailid},{user_mobile:user.user_mobile}, {$set:user}, (err, upduser) => {
             if(err){
                 return res.status(400).json({
                     error:"Unable to update"
                 })
             }
-            res.json(onebook);
+            res.json(oneuser);
         })
     })
 }
