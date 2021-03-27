@@ -1,29 +1,28 @@
 require('dotenv').config()
-const express = require('express')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-const app = express();
-const usersRouter = require('./routers/userRouter')
+var express = require('express')
+var cors = require('cors')
+var app = express();
+var bodyParser = require('body-parser')
+var DB = require("./config/db.config")
+var Config=require("./config/app.config")
+var usersRouter = require('./routers/userRouter')
 
 app.use(express.json());
-app.use(bodyParser.json())
-app.use('/user', usersRouter)
+app.use(express.urlencoded({extended:true}))
 
-mongoose.connect('mongodb+srv://pavan:Pavan5678@cluster0.rhmr5.mongodb.net/registeredusers?retryWrites=true&w=majority',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-}).then(
-    (res) => {
-        console.log("Connected to database");
-    },
-    (err) => {
-        console.log("Unable to connect to database")
-    }
-)
 
-app.listen(process.env.PORT, () => {
-    console.log("Connected to server at port " + (process.env.PORT));
+DB.connect()
+app.use(cors());
+app.use('/user',usersRouter)
+// app.use(bodyParser.urlencoded({extended:false}))
+
+// app.use(bodyParser.json())
+// app.use(route)
+// app.use('/user', usersRouter)
+
+
+app.listen(Config.config.PORT, () => {
+    console.log("Connected to server at port "+(Config.config.PORT) );
 })
 
 app.get("/test", (req, res) => {
