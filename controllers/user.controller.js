@@ -77,6 +77,39 @@ exports.checkUsername= (request,response) => {
      })
 }
 
+exports.changePassword=(request,response) =>{
+
+    var userData= request.body;
+
+    UserModel.findOne({user_emailid:userData.user_emailid},(err, doc) => {
+        if(err){
+            console.log(err);
+            response.send({status:false, err:err.message})
+        } 
+         if(doc){
+            //  console.log(doc)
+               if(doc.user_password == userData.user_currentpassword){
+                
+                 UserModel.updateOne({user_emailid:userData.user_emailid},{user_password: userData.user_newPassword},(err,res) => {
+                     if(err){
+                        console.log(err);
+                        response.send({status:false, err:err.message})
+                     }
+                     if(res){
+                        response.send({status:true, message:"updated"})
+                        console.log("password changed from " + doc.user_password + "  to  " + userData.user_newPassword )
+                     }
+                 })
+
+               }
+               else
+                {
+                    response.send({status:false, err:"current password is incorrect"})
+                }
+         }
+    })
+}
+
 
 
 

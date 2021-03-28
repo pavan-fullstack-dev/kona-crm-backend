@@ -13,6 +13,9 @@ userRouter.post('/login',UserController.loginUser);
 //http://localhost:8185/user/checkusername
 userRouter.post('/checkusername',UserController.checkUsername);
 
+//http://localhost:8185/user/changepassword
+userRouter.post('/changepassword',UserController.changePassword);
+
 
 module.exports=userRouter;
 
