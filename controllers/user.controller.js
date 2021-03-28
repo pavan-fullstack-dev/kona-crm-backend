@@ -17,7 +17,7 @@ exports.registerUser=(request,response)=>{
         if(doc._id){
             var payload={id:doc._id};
             var token=JWT.sign(payload,Config.config.JWT_SECRET)
-          response.send({result:"success", token:token});   
+          response.send({result:"Registration success", token:token});   
         }
     })
 }
