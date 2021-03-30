@@ -7,7 +7,7 @@ exports.connect=()=>{
     mongoose.connect(Config.config.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },(err)=>{
       
         if(err){
-            console.log("error");
+            console.log("error"+ err.message);
         }
         else{
             console.log("connected to Data Base in MONGO_URL");

@@ -1,9 +1,7 @@
 var JWT=require("jsonwebtoken");
-
-var express= require("express");
-
-var UserModel=require("../models/userSchema");
 var Config=require("../config/app.config");
+// var LeadModel=require("../models/leadSchema");
+
 
 exports.registerUser=(request,response)=>{
 
@@ -29,17 +27,17 @@ exports.loginUser= (request,response) => {
     var userData= request.body;
     console.log(userData);
 
-        UserModel.findOne({user_emailid:userData.user_emailid},(err, doc) => {
+        UserModel.findOne({emailId:userData.emailId},(err, doc) => {
             if(err){
                 console.log(err);
-                response.send({status:false, err:err.message})
+                response.send({status:false, err:err.message});
             } 
              if(doc){
 
                 console.log('doc found',doc);
 
               
-                    if(doc.user_password == userData.user_password){
+                    if(doc.password == userData.password){
                         var payload={id:doc._id};
                         var token=JWT.sign(payload,Config.config.JWT_SECRET)
                       response.send({result:true,token:token});   
@@ -61,7 +59,7 @@ exports.checkUsername= (request,response) => {
  
     var userData= request.body;
 
-     UserModel.findOne({user_firstname:userData.user_firstname},(err,doc) =>{
+     UserModel.findOne({firstname:userData.firstname},(err,doc) =>{
          if(err){
              console.log(err);
              response.send({status:false, err:err.message});
@@ -81,23 +79,23 @@ exports.changePassword=(request,response) =>{
 
     var userData= request.body;
 
-    UserModel.findOne({user_emailid:userData.user_emailid},(err, doc) => {
+    UserModel.findOne({emailId:userData.emailId},(err, doc) => {
         if(err){
             console.log(err);
             response.send({status:false, err:err.message})
         } 
          if(doc){
             //  console.log(doc)
-               if(doc.user_password == userData.user_currentpassword){
+               if(doc.password == userData.currentpassword){
                 
-                 UserModel.updateOne({user_emailid:userData.user_emailid},{user_password: userData.user_newPassword},(err,res) => {
+                 UserModel.updateOne({emailId:userData.emailId},{password: userData.newpassword},(err,res) => {
                      if(err){
                         console.log(err);
                         response.send({status:false, err:err.message})
                      }
                      if(res){
                         response.send({status:true, message:"updated"})
-                        console.log("password changed from " + doc.user_password + "  to  " + userData.user_newPassword )
+                       // console.log("password changed from " + doc.password + "  to  " + userData.newPassword )
                      }
                  })
 
@@ -109,8 +107,6 @@ exports.changePassword=(request,response) =>{
          }
     })
 }
-
-
 
 
 
@@ -220,4 +216,4 @@ exports.changePassword=(request,response) =>{
 //             res.json(rmuser);
 //         })
 //     })
-// }
+//   }

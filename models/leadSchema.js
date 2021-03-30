@@ -1,12 +1,12 @@
 var mongoose=require("mongoose");
 var Schema=mongoose.Schema;
-var UserSchema=new Schema(
+var leadSchema=new Schema(
     {
-        firstname:{
+        leadDate:{
             type:String,
             required:true
         },
-        lastname:{
+        emailId:{
             type:String,
             required:true
         },
@@ -14,16 +14,21 @@ var UserSchema=new Schema(
             type:Number,
             required:true
         },
-        password:{
+        technology:{
             type:String,
             required:true
         },
-        emailId:{
+        source:{
             type:String,
             required:true,
-            index:true
-        }
+        },
+        leadOwner:{
+            type:String,
+            required:true
+        },
+        
+        
     }
 );
 
-module.exports=mongoose.model('user',UserSchema)
+module.exports=mongoose.model('lead',leadSchema)
